@@ -1,6 +1,7 @@
 import { useAuthStore } from "@/store";
 import {
   canAccessAdminUsers,
+  canAccessAccounting,
   canAccessLeases,
   canCreateMaintenanceRequest,
   canManageAgencyOnboarding,
@@ -14,6 +15,7 @@ import {
 import {
   ArrowLeft,
   Building2,
+  Calculator,
   ClipboardList,
   LayoutDashboard,
   LogOut,
@@ -123,6 +125,14 @@ export default function AppSidebar() {
         label: "My Agencies",
         to: "/branch-manager/agencies",
         icon: Building2,
+      });
+    }
+
+    if (canAccessAccounting(user)) {
+      baseLinks.push({
+        label: "Accounting",
+        to: "/dashboard/accounting",
+        icon: Calculator,
       });
     }
 

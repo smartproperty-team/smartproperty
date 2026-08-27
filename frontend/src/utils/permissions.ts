@@ -83,6 +83,11 @@ const REVIEW_MODERATION_ROLES: UserRole[] = [
   UserRole.RENTAL_MANAGER,
 ];
 
+const ACCOUNTING_ROLES: UserRole[] = [
+  UserRole.SUPER_ADMIN,
+  UserRole.ACCOUNTANT_ADMIN_ASSISTANT,
+];
+
 function hasRole(
   user: User | null | undefined,
   allowedRoles: UserRole[],
@@ -213,6 +218,13 @@ export function canManageFavorites(user: User | null | undefined): boolean {
  */
 export function canModerateReviews(user: User | null | undefined): boolean {
   return hasRole(user, REVIEW_MODERATION_ROLES);
+}
+
+/**
+ * Can access the accountant dashboard (income reports, analytics, exports).
+ */
+export function canAccessAccounting(user: User | null | undefined): boolean {
+  return hasRole(user, ACCOUNTING_ROLES);
 }
 
 /**

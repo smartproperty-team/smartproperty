@@ -48,6 +48,11 @@ export const APPLICATION_REVIEW_ROLES: UserRole[] = [
   ...PLATFORM_ADMIN_ROLES,
 ];
 
+export const ACCOUNTING_ROLES: UserRole[] = [
+  UserRole.ACCOUNTANT_ADMIN_ASSISTANT,
+  ...PLATFORM_ADMIN_ROLES,
+];
+
 export const LEASE_MANAGEMENT_ROLES: UserRole[] = [
   UserRole.OWNER,
   UserRole.BRANCH_MANAGER,

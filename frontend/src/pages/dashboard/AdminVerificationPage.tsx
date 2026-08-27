@@ -396,31 +396,57 @@ export default function AdminVerificationPage() {
       v.overallStatus === VerificationStatus.UNDER_REVIEW,
   ).length;
 
+  const highRiskCount = verifications.filter(
+    (v) => v.riskLevel === RiskLevel.HIGH,
+  ).length;
+
   return (
-    <div className="min-h-screen bg-gray-50 pt-16 lg:pt-24">
+    <div className="min-h-screen bg-gray-50 pt-16 lg:pt-[72px]">
       <AppSidebar />
       {/* Header */}
-      <header className="sticky top-16 z-40 border-b border-gray-200 bg-white shadow-sm lg:top-24">
-        <div className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-4 sm:px-6 lg:px-8">
+      <header className="sticky top-16 z-40 border-b border-gray-200 bg-white shadow-md lg:top-[72px]">
+        <div className="mx-auto flex h-20 max-w-6xl items-center gap-4 px-4 sm:px-6 lg:px-8">
           <button
             onClick={() => navigate('/dashboard')}
-            className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900"
+            className="hidden items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-medium text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-900 sm:flex"
+            aria-label="Back to dashboard"
           >
             <ArrowLeft className="h-4 w-4" />
-            Dashboard
+            <span className="hidden md:inline">Dashboard</span>
           </button>
-          <div className="h-6 w-px bg-gray-200" />
-          <div className="flex items-center gap-2">
-            <Shield className="h-5 w-5 text-indigo-600" />
-            <span className="text-lg font-semibold text-gray-900">
-              Verification Review
-            </span>
+          <div className="hidden h-8 w-px bg-gray-200 sm:block" />
+
+          <div className="flex min-w-0 flex-1 items-center gap-3">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-indigo-50">
+              <Shield className="h-5 w-5 text-indigo-600" />
+            </div>
+            <div className="min-w-0">
+              <h1 className="truncate text-lg font-semibold leading-tight text-gray-900">
+                Verification Review
+              </h1>
+              <p className="mt-0.5 truncate text-xs text-gray-500">
+                {verifications.length} total ·{' '}
+                <span className="font-medium text-gray-700">
+                  {pendingCount} to review
+                </span>
+                {highRiskCount > 0 && (
+                  <span className="font-medium text-red-600">
+                    {' '}
+                    · {highRiskCount} high risk
+                  </span>
+                )}
+              </p>
+            </div>
           </div>
-          {pendingCount > 0 && (
-            <span className="ml-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white">
-              {pendingCount}
-            </span>
-          )}
+
+          <div className="flex shrink-0 items-center gap-2">
+            {pendingCount > 0 && (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-red-50 px-2.5 py-1 text-xs font-semibold text-red-700 ring-1 ring-red-100">
+                <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
+                {pendingCount} pending
+              </span>
+            )}
+          </div>
         </div>
       </header>
 
