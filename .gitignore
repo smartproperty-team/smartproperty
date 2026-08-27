@@ -15,12 +15,18 @@ out/
 *.tsbuildinfo
 
 # Environment files (IMPORTANT: Keep secrets safe!)
+# Matches .env at the repo root and in every subdirectory
 .env
-.env.local
-.env.development
-.env.production
-.env.*.local
+.env.*
+**/.env
+**/.env.*
+# ...but templates without secrets are still tracked
 !.env.example
+!.env.template
+!.env.sample
+!**/.env.example
+!**/.env.template
+!**/.env.sample
 
 # Logs
 logs/
